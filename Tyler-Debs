@@ -1,0 +1,55 @@
+from replit import clear 
+def option1(): 
+    print("What Would You Like Your Username To Be?")
+    username = input("Username: ")
+    print("")
+    print("What Would You Like Your Password To Be?")
+    password = input("Password: ")  
+
+    with open("accountfile.txt", "a") as file:  
+        file.write(username + " " + password + "\n") 
+    print("Now Go and log in")
+    print("Press Enter To Continue")
+    input()
+    clear()
+    lobby()
+
+def option2():
+    username = input("Please enter your username ->  ")
+    password = input("Please enter your password ->  ")
+
+    with open("accountfile.txt", "r") as file:  
+        accounts = file.readlines()
+
+    user_found = False
+    for line in accounts:
+        saved_username, saved_password = line.strip().split(" ")
+        if saved_username == username and saved_password == password:
+            print("Login successful!")
+            user_found = True
+            break
+
+    if not user_found:
+        print("Invalid username or password.")
+        print("")
+        print("Press Enter To Go Back To Homescreen")
+        input()
+        clear()
+        lobby()
+
+def lobby():
+    print("Hi, Welcome")
+    print("")
+    print("1. Create Account")
+    print("2. Login")
+    print("")
+    lobbyoption = input("Please select an option: ")
+    clear()
+    if lobbyoption == "1":
+        option1()
+
+    if lobbyoption == "2":
+        option2()
+
+lobby()
+        
